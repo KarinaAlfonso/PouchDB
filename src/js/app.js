@@ -1,13 +1,14 @@
 
 console.log('Iniciando PouchDB...');
 
-// Crear la base de datos PouchDB 
+// PUNTO 4 - CREAR BASE DE DATOS
 let db = new PouchDB('héroes');
 
-// verificar creación
-db.info().then(info => {
-    console.log('Base de datos creada:', info);
-    document.getElementById('status').textContent = 'Base de datos "héroes" creada correctamente';
+// Verificar creación de la base de datos
+db.info()
+    .then(info => {
+        console.log('Base de datos creada:', info);
+        document.getElementById('status').textContent = 'Base de datos "héroes" creada correctamente';
 
     // PUNTO 5 - CLAVE PRIMARIA
     let heroId = {
@@ -104,8 +105,28 @@ db.info().then(info => {
         console.error('ERROR AL EDITAR (JSON):', error)
     });
 
-}).catch(error => {
-    console.error('Error al crear la BD:', error);
-    document.getElementById('status').textContent = 'Error: ' + error;
-});
+    // PUNTO 9 - Eliminar mediante documento (Variable)
+    db.get('heroe_002').then(doc => {
+        return db.remove(doc);
+    }).then(res => {
+        console.log('Eliminando (documento/variable):', res);
+        document.getElementById('status').textContent = 'Registro eliminado correctamente';
+    }).catch(error => {
+        console.error('Error al eliminar (documento/variable):', error);
+    });
+
+    // PUNTO 9 - Eliminar mediante JSON
+    /*db.get('heroe_002').then(doc => {
+        return db.remove(doc._id, doc._rev);
+    }).then(res => {
+        console.log('Eliminando (JSON):', res);
+        document.getElementById('status').textContent = 'Registro eliminado correctamente';
+    }).catch(error => {
+        console.error('Error al eliminar (JSON con _id y _rev):', error);
+    });*/
+})
+    .catch(error => {
+        console.error('Error al crear la BD:', error);
+        document.getElementById('status').textContent = 'Error: ' + error;
+    });
 
