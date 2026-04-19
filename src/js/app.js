@@ -145,6 +145,7 @@ db.info()
     */
 
     // PUNTO 9 - Eliminar mediante JSON
+    /*
     db.get('heroe_003').then(doc => {
         return db.remove(doc._id, doc._rev);
     }).then(res => {
@@ -153,6 +154,21 @@ db.info()
     }).catch(error => {
         console.error('Error al eliminar (JSON con _id y _rev):', error);
     });
+    */
+
+    // PUNTO 10 - Retornar todos los registros
+    db.allDocs({ include_docs: true })
+        .then(result => {
+            console.log('TODOS LOS REGISTROS:', result);
+            console.log('Cantidad de documentos:', result.total_rows);
+            result.rows.forEach(row => {
+                console.log(`- ID: ${row.id}, Nombre: ${row.doc.nombre}, Poder: ${row.doc.poder}, Ciudad: ${row.doc.ciudad}`);
+            });
+            document.getElementById('status').textContent = 'Total de registros: ' + result.total_rows;
+        })
+        .catch(error => {
+            console.error('Error al obtener registros:', error);
+        });
 })
     .catch(error => {
         console.error('Error al crear la BD:', error);
