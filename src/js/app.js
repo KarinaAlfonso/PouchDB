@@ -1,4 +1,3 @@
-
 console.log('Iniciando PouchDB...');
 
 // PUNTO 4 - CREAR BASE DE DATOS
@@ -26,6 +25,29 @@ db.info()
             console.error('ERROR:', error);
         });
 
+    db.put({
+        _id: 'heroe_002',
+        nombre: 'Batman',
+        poder: 'Dinero',
+        ciudad: 'Gotham'
+    }).then(res => {
+        console.log('OK:', res);
+    }).catch(error => {
+        console.error('ERROR:', error);
+    });
+
+    db.put({
+        _id: 'heroe_003',
+        nombre: 'Flash',
+        poder: 'Velocidad',
+        ciudad: 'Central City'
+    }).then(res => {
+        console.log('OK:', res);
+    }).catch(error => {
+        console.error('ERROR:', error);
+    });
+
+    /*
     // PUNTO 6 - ID AUTOMÁTICO
     // Documento
     db.post({
@@ -48,7 +70,9 @@ db.info()
     }).catch(error => {
         console.error('ERROR:', error);
     });
+    */
 
+    /*
     // PUNTO 7 - BLOB 
     async function guardarBlob() {
         try {
@@ -79,16 +103,18 @@ db.info()
         }
     }
     guardarBlob();
+    */
 
+    /*
     // PUNTO 8 - Editar mediante documento (variable)
-    /*db.get('heroe_001').then(doc => {
-        doc.ciudad = 'Smallville'; // Cambia el valor
+    db.get('heroe_001').then(doc => {
+        doc.ciudad = 'Smallville';
         return db.put(doc);
     }).then(res => {
         console.log('EDITADO (documento):', res);
     }).catch(error => {
         console.error('ERROR AL EDITAR (documento):', error);
-    });*/
+    });
 
     // PUNTO 8 - Editar mediante documento (JSON)
     db.get('heroe_001').then(doc => {
@@ -97,13 +123,14 @@ db.info()
             _rev: doc._rev,
             nombre: 'Superman',
             poder: 'Superfuerza',
-            ciudad: 'Nueva York' // Cambia el valor
+            ciudad: 'Nueva York'
         });
     }).then(res => {
         console.log('EDITADO (JSON):', res);
     }).catch(error => {
         console.error('ERROR AL EDITAR (JSON):', error)
     });
+    */
 
     // PUNTO 9 - Eliminar mediante documento (Variable)
     db.get('heroe_002').then(doc => {
@@ -116,17 +143,18 @@ db.info()
     });
 
     // PUNTO 9 - Eliminar mediante JSON
-    /*db.get('heroe_002').then(doc => {
+    /*
+    db.get('heroe_003').then(doc => {
         return db.remove(doc._id, doc._rev);
     }).then(res => {
         console.log('Eliminando (JSON):', res);
         document.getElementById('status').textContent = 'Registro eliminado correctamente';
     }).catch(error => {
         console.error('Error al eliminar (JSON con _id y _rev):', error);
-    });*/
+    });
+    */
 })
     .catch(error => {
         console.error('Error al crear la BD:', error);
         document.getElementById('status').textContent = 'Error: ' + error;
     });
-
