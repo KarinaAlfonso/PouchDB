@@ -133,6 +133,7 @@ db.info()
     */
 
     // PUNTO 9 - Eliminar mediante documento (Variable)
+    /*
     db.get('heroe_002').then(doc => {
         return db.remove(doc);
     }).then(res => {
@@ -140,10 +141,10 @@ db.info()
         document.getElementById('status').textContent = 'Registro eliminado correctamente';
     }).catch(error => {
         console.error('Error al eliminar (documento/variable):', error);
-    });
+    }); 
+    */
 
     // PUNTO 9 - Eliminar mediante JSON
-    /*
     db.get('heroe_003').then(doc => {
         return db.remove(doc._id, doc._rev);
     }).then(res => {
@@ -152,7 +153,6 @@ db.info()
     }).catch(error => {
         console.error('Error al eliminar (JSON con _id y _rev):', error);
     });
-    */
 })
     .catch(error => {
         console.error('Error al crear la BD:', error);
