@@ -157,6 +157,7 @@ db.info()
     */
 
     // PUNTO 10 - Retornar todos los registros
+    /*
     db.allDocs({ include_docs: true })
         .then(result => {
             console.log('TODOS LOS REGISTROS:', result);
@@ -169,6 +170,48 @@ db.info()
         .catch(error => {
             console.error('Error al obtener registros:', error);
         });
+    */
+
+    // PUNTO 11 - Manejo de errores en PouchDB
+
+    // NOT_FOUND: Intentar obtener un documento que no existe
+    db.get('heroe_999')
+        .then(doc => {
+            console.log('Documento encontrado:', doc);
+        })
+        .catch(error => {
+            console.error('ERROR NOT_FOUND:', error.name, '- Mensaje:', error.message);
+            document.getElementById('status').textContent = 'Error: Documento no encontrado (heroe_999)';
+        });
+
+    // CONFLICT: Intentar insertar un documento con _id que ya existe
+    /*
+    db.put({
+        _id: 'heroe_001',
+        nombre: 'Superman Duplicado',
+        poder: 'Superfuerza',
+        ciudad: 'Nueva Ciudad'
+    })
+        .then(res => {
+            console.log('Documento creado:', res);
+        })
+        .catch(error => {
+            console.error('ERROR CONFLICT:', error.name, '- Mensaje:', error.message);
+            document.getElementById('status').textContent = 'Error: Conflicto al crear documento (ya existe heroe_001)';
+        });
+    */
+
+    // REMOVE SIN _REV: Intentar eliminar sin pasar la revisión
+    /*
+    db.remove('heroe_001')
+        .then(res => {
+            console.log('Documento eliminado:', res);
+        })
+        .catch(error => {
+            console.error('ERROR REMOVE:', error.name, '- Mensaje:', error.message);
+            document.getElementById('status').textContent = 'Error: No se puede eliminar sin _rev';
+        });
+    */
 })
     .catch(error => {
         console.error('Error al crear la BD:', error);
